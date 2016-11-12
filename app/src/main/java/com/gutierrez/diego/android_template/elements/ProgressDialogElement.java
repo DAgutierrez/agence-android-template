@@ -19,9 +19,9 @@ public  class ProgressDialogElement {
         this.progressDialog = new ProgressDialog(context);
     }
 
-    public  void show() {
+    public  void showSpinner() {
 
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(message);
         progressDialog.setCanceledOnTouchOutside(false);

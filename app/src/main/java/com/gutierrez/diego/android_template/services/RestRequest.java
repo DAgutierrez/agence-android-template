@@ -5,17 +5,18 @@ package com.gutierrez.diego.android_template.services;
  */
 public class RestRequest {
 
-    private String address;
+    private String api;
     private String method;
     private String params;
+    private String authorization;
 
 
-    public String getAddress() {
-        return address;
+    public String getApi() {
+        return api;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setApi(String api) {
+        this.api = api;
     }
 
     public String getMethod() {
@@ -32,5 +33,13 @@ public class RestRequest {
 
     public void setParams(String params) {
         this.params = params;
+    }
+
+    public String getAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(String authorization) {
+        this.authorization = authorization;
     }
 }

@@ -2,10 +2,10 @@ package com.gutierrez.diego.android_template.services;
 
 import android.content.Context;
 
-import com.gutierrez.diego.android_template.MainActivity;
-
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.Callable;
@@ -32,10 +32,10 @@ public class RestWebServiceCallable  implements Callable<String> {
     @Override
     public String call() throws Exception {
 
-        String address = restRequest.getAddress();
+        String address = ConfigService.SERVER_ADDRESS + restRequest.getApi();
         String method = restRequest.getMethod();
         String requestParams = restRequest.getParams();
-        String token = "f0f8da77771cd4ed2019c0a5efc30fa2516674c8";
+        String authorization = restRequest.getAuthorization();
 
         String responseString = "";
 
@@ -43,38 +43,60 @@ public class RestWebServiceCallable  implements Callable<String> {
 
             URL url = new URL(address);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
             conn.setRequestMethod(method);
             conn.setConnectTimeout(CONNECT_TIMEOUT_VALUE);
             conn.setReadTimeout(TIMEOUT_VALUE);
-            conn.addRequestProperty("Authorization", "Bearer " + token);
+            conn.addRequestProperty("Authorization", authorization);
+            conn.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
+            System.out.println(requestParams);
 
-//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
-//            bw.write(requestParams);
-//            bw.flush();
-//            bw.close();
+            if(requestParams != null) {
+
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
+                bw.write(requestParams);
+                bw.flush();
+                bw.close();
+            }
+
+            conn.connect();
 
             int responseCode = conn.getResponseCode();
-            System.out.println("\nSending 'GET' request to URL : " + url);
+            System.out.println("\nSending '"+ method +"' request to URL : " + url);
             System.out.println("Response Code : " + responseCode);
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+            if(responseCode == 200) {
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                responseString = response.toString();
+                System.out.println("response =>" + responseString);
+
+            } else {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conn.getErrorStream()));
+                String inputLine;
+                StringBuffer responseError = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    responseError.append(inputLine);
+                }
+
+                return  "Error " + responseError.toString();
             }
-            in.close();
-
-            responseString = response.toString();
-
-            System.out.println("response =>" + responseString);
-
 
         } catch(Exception e) {
             e.printStackTrace();
+            return "Error " + e.getMessage();
         }
 
         return responseString;
