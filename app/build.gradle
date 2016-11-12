@@ -16,7 +16,7 @@ android {
         main {
             res.srcDirs = [
                     'src/main/res',
-                    'src/main/res-screen/menu',
+                    'src/main/res-screen/add-task',
                     'src/main/res-screen/home',
                     'src/main/res-screen/login',
             ]

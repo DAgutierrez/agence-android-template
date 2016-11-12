@@ -12,6 +12,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.gutierrez.diego.android_template.activities.HomeActivity"
     tools:showIn="@layout/app_bar_home"
-    android:background="@drawable/background_gradient">
+    android:background="@color/colorWhite">
 
 </RelativeLayout>

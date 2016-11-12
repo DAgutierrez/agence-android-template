@@ -15,7 +15,7 @@ import com.gutierrez.diego.android_template.R;
 /**
  * Created by diego on 31-10-16.
  */
-public class HomeFragment  extends Fragment{
+public class AddTaskFragment  extends Fragment{
 
     Context context;
     FragmentManager fm;
@@ -35,7 +35,7 @@ public class HomeFragment  extends Fragment{
                              Bundle savedInstanceState)
     {
 
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_add_task, container, false);
 
     }
 
