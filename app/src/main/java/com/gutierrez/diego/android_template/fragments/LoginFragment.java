@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.gutierrez.diego.android_template.calls.login.MakeLoginCall;
 import com.gutierrez.diego.android_template.elements.ProgressDialogElement;
 import com.gutierrez.diego.android_template.utils.ErrorHandlerUtil;
 import com.gutierrez.diego.android_template.utils.JsonUtil;
+import com.gutierrez.diego.android_template.utils.ScreenUtil;
 import com.gutierrez.diego.android_template.utils.SessionManager;
 import com.gutierrez.diego.android_template.utils.ThreadManager;
 
@@ -64,16 +67,15 @@ public class LoginFragment extends Fragment {
         fm = getActivity().getSupportFragmentManager();
         session = new SessionManager(context,fm);
 
+
+
+
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater,final ViewGroup container,
                              Bundle savedInstanceState)
     {
-
-//        appCompatActivity =  ((AppCompatActivity) getActivity());
-//        ScreenUtil.HideActionBar(appCompatActivity);
-
         return inflater.inflate(R.layout.fragment_login, container, false);
 
     }
@@ -104,6 +106,13 @@ public class LoginFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+
+        if(actionBar != null) {
+            actionBar.hide();
+        }
+
 
     }
 
@@ -154,12 +163,13 @@ public class LoginFragment extends Fragment {
                                     sessionManager =  new SessionManager(context,fm);
                                     sessionManager.createLoginSession(username, password, token);
 
-                                    Intent homeActivity = new Intent(context, HomeActivity.class);
-                                    startActivity(homeActivity);
+                                    progressDialogLogin.dismiss();
 
-//                                fm.beginTransaction()
-//                                        .replace(R.id.home_container, new HomeFragment())
-//                                        .commit();
+                                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                                    fragmentTransaction
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                            .replace(R.id.main_container, new HomeFragment())
+                                            .commit();
 
                                 } catch (Exception e) {
                                     e.printStackTrace();

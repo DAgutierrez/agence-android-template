@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+//        setContentView(R.layout.activity_home);
 
         context = this;
 
@@ -44,9 +44,9 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                fragmentManager.beginTransaction()
-                        .add(R.id.home_container, new AddTaskFragment())
-                        .commit();
+//                fragmentManager.beginTransaction()
+//                        .add(R.id.home_container, new AddTaskFragment())
+//                        .commit();
 
 //                btnAddTask.setVisibility(View.GONE);
 
@@ -59,8 +59,8 @@ public class HomeActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
 
     }

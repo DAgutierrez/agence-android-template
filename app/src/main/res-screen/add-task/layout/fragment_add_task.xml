@@ -1,15 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/add_task_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:padding="20dp"
+    android:background="@drawable/background_gradient">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!--<TextView-->
+        <!--android:id="@+id/main_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Nuevo Trabajo"-->
+        <!--android:textColor="@color/colorText"-->
+        <!--android:textSize="20dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:gravity="center"/>-->
+
+    <LinearLayout
+        android:id="@+id/inp_patent_car_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="addTask"
-        android:textColor="@color/colorText"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/icon_patent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:background="@drawable/ic_directions_car_black_24dp"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/txt_car_patent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:hint="Patente vehiculo a trabajar"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorTextHint"
+             />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/inp_title_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/inp_patent_car_container">
+
+        <ImageView
+            android:id="@+id/icon_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:background="@drawable/ic_title_black_24dp"/>
+
+        <EditText
+            android:id="@+id/txt_work_to_do"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:hint="Trabajo a realizar"
+            android:textColorHint="@color/colorTextHint"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/inp_description_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/inp_title_container">
+
+        <ImageView
+            android:id="@+id/icon_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:background="@drawable/ic_description_black_24dp"/>
+
+        <EditText
+            android:id="@+id/txt_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:hint="Descripción"
+            android:textColorHint="@color/colorTextHint"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/inp_hours_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/inp_description_container">
+
+        <ImageView
+            android:id="@+id/icon_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:background="@drawable/ic_access_time_black_24dp"/>
+
+        <EditText
+            android:id="@+id/txt_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:layout_weight="1"
+            android:hint="Horas de trabajo"
+            android:textColorHint="@color/colorTextHint"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/inp_start_date_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/inp_hours_container">
+
+        <TextView
+            android:id="@+id/txtStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha de inicio"
+            android:textColor="@color/colorTextHint"
+            android:layout_below="@+id/txtS"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/inp_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/inp_start_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 14 de nov de 2016 a las 13:35"
+                android:textColor="@color/colorTextHint"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:layout_centerInParent="true"
+                />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/inp_end_date_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/inp_start_date_container">
+
+        <TextView
+            android:id="@+id/txtEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha de termino"
+            android:textColor="@color/colorTextHint"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/inp_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14 nov. 2016 13:35"
+                android:textColor="@color/colorTextHint"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:layout_centerInParent="true"
+                />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:theme="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Guardar"
+        />
+
+
+</RelativeLayout>

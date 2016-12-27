@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import com.gutierrez.diego.android_template.MainActivity;
 import com.gutierrez.diego.android_template.R;
 import com.gutierrez.diego.android_template.activities.HomeActivity;
+import com.gutierrez.diego.android_template.fragments.HomeFragment;
 import com.gutierrez.diego.android_template.fragments.LoginFragment;
 
 import java.util.HashMap;
@@ -53,13 +54,18 @@ public class SessionManager {
     public void checkLogin() {
         // Check login status
         if (!this.isLoggedIn()) {
+
             fm.beginTransaction()
                     .add(R.id.main_container, new LoginFragment())
                     .commit();
         } else {
 
-            Intent homeActivity = new Intent(_context, HomeActivity.class);
-            _context.startActivity(homeActivity);
+//            Intent homeActivity = new Intent(_context, HomeActivity.class);
+//            _context.startActivity(homeActivity);
+
+            fm.beginTransaction()
+                    .add(R.id.main_container, new HomeFragment())
+                    .commit();
 
         }
 
