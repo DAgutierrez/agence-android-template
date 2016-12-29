@@ -1,4 +1,4 @@
-package com.gutierrez.diego.android_template.services;
+package com.gutierrez.diego.android_template.RestClient;
 
 import android.content.Context;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by diego on 17-10-16.
  */
-public class RestWebServiceCallable  implements Callable<String> {
+public class RestClient implements Callable<String> {
 
     Context context;
     RestRequest restRequest;
@@ -23,7 +23,7 @@ public class RestWebServiceCallable  implements Callable<String> {
 
 
 
-    public RestWebServiceCallable(Context context, RestRequest restRequest){
+    public RestClient(Context context, RestRequest restRequest){
         super();
         this.context = context;
         this.restRequest = restRequest;
@@ -32,7 +32,7 @@ public class RestWebServiceCallable  implements Callable<String> {
     @Override
     public String call() throws Exception {
 
-        String address = ConfigService.SERVER_ADDRESS + restRequest.getApi();
+        String address = RestClientConfig.SERVER_ADDRESS + restRequest.getApi();
         String method = restRequest.getMethod();
         String requestParams = restRequest.getParams();
         String authorization = restRequest.getAuthorization();
@@ -49,8 +49,6 @@ public class RestWebServiceCallable  implements Callable<String> {
             conn.setReadTimeout(TIMEOUT_VALUE);
             conn.addRequestProperty("Authorization", authorization);
             conn.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-            System.out.println(requestParams);
 
             if(requestParams != null) {
 
@@ -79,7 +77,6 @@ public class RestWebServiceCallable  implements Callable<String> {
                 in.close();
 
                 responseString = response.toString();
-                System.out.println("response =>" + responseString);
 
             } else {
                 BufferedReader in = new BufferedReader(
@@ -100,7 +97,6 @@ public class RestWebServiceCallable  implements Callable<String> {
         }
 
         return responseString;
-
 
     }
 }

@@ -12,16 +12,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gutierrez.diego.android_template.fragments.LoginFragment;
-import com.gutierrez.diego.android_template.utils.ScreenUtil;
-import com.gutierrez.diego.android_template.utils.SessionManager;
+import com.gutierrez.diego.android_template.fragments.HomeFragment;
+import com.gutierrez.diego.android_template.fragments.login.LoginFragment;
+import com.gutierrez.diego.android_template.managers.SessionManager;
+import com.gutierrez.diego.android_template.managers.SessionManagerImpl;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    SessionManager sessionManager;
     Context context;
     AppCompatActivity appCompatActivity;
+
+    SessionManagerImpl sessionManager;
+
+    FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +34,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.main_activity);
 
         context = this;
+        fm = this.getSupportFragmentManager();
 
-        sessionManager = new SessionManager(context,fragmentManager);
-
+        sessionManager =  new SessionManagerImpl(context);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -49,12 +53,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(savedInstanceState == null) {
 
-            sessionManager.checkLogin();
+            if(sessionManager.isLoggedIn()) {
+                fm.beginTransaction()
+                    .add(R.id.main_container, new LoginFragment())
+                    .commit();
+            } else {
+                fm.beginTransaction()
+                    .add(R.id.main_container, new HomeFragment())
+                    .commit();
+            }
 
         }
-
-
-
 
 
     }

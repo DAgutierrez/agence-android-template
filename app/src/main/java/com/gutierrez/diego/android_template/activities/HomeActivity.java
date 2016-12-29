@@ -3,7 +3,6 @@ package com.gutierrez.diego.android_template.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,15 +16,14 @@ import android.view.View;
 
 
 import com.gutierrez.diego.android_template.R;
-import com.gutierrez.diego.android_template.fragments.AddTaskFragment;
-import com.gutierrez.diego.android_template.utils.SessionManager;
+import com.gutierrez.diego.android_template.managers.SessionManagerImpl;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Context context;
-    SessionManager sessionManager;
     FragmentManager fragmentManager;
+    SessionManagerImpl sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +31,9 @@ public class HomeActivity extends AppCompatActivity
 //        setContentView(R.layout.activity_home);
 
         context = this;
+        sessionManager = new SessionManagerImpl(this);
 
         fragmentManager = getSupportFragmentManager();
-        sessionManager = new SessionManager(context,fragmentManager);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 

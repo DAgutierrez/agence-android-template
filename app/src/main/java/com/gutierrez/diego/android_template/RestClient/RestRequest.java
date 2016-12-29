@@ -1,4 +1,4 @@
-package com.gutierrez.diego.android_template.services;
+package com.gutierrez.diego.android_template.RestClient;
 
 /**
  * Created by diego on 17-10-16.
