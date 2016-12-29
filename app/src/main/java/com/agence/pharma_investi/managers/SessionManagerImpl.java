@@ -46,10 +46,6 @@ public class SessionManagerImpl implements SessionManager {
 
         editor.commit();
 
-//        Boolean isLogin = pref.getBoolean(IS_LOGIN, false);
-//
-//        Log.e("log",isLogin.toString());
-
     }
 
     @Override public HashMap<String, String> getUserDetails(){
