@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.agence.pharma_investi.fragments.HomeFragment;
 import com.agence.pharma_investi.fragments.login.LoginFragment;
 import com.agence.pharma_investi.managers.SessionManagerImpl;
 
@@ -30,13 +31,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.main_activity);
 
         context = this;
-        fm = this.getSupportFragmentManager();
 
-        sessionManager =  new SessionManagerImpl(context);
+        fm = this.getSupportFragmentManager();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -51,23 +50,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        if(savedInstanceState == null) {
-//
-//            fm.beginTransaction()
-//                    .add(R.id.main_container, new LoginFragment())
-//                    .commit();
-//
-//            if(sessionManager.isLoggedIn()) {
-//                fm.beginTransaction()
-//                    .add(R.id.main_container, new LoginFragment())
-//                    .commit();
-//            } else {
-//                fm.beginTransaction()
-//                    .add(R.id.main_container, new HomeFragment())
-//                    .commit();
-//            }
-//
-//        }
+        if(savedInstanceState == null) {
+
+            sessionManager =  new SessionManagerImpl(context);
+
+            if(sessionManager.isLoggedIn()) {
+                fm.beginTransaction()
+                        .add(R.id.main_container, new HomeFragment())
+                        .commit();
+            } else {
+                fm.beginTransaction()
+                        .add(R.id.main_container, new LoginFragment())
+                        .commit();
+
+            }
+
+        }
 
     }
 

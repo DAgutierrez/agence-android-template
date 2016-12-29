@@ -1,9 +1,12 @@
 package com.agence.pharma_investi.presenters.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import com.agence.pharma_investi.MainActivity;
 import com.agence.pharma_investi.calls.client.LoginCall;
+import com.agence.pharma_investi.fragments.login.LoginFragment;
 import com.agence.pharma_investi.fragments.login.LoginView;
 import com.agence.pharma_investi.managers.SessionManagerImpl;
 import com.agence.pharma_investi.utils.JsonUtil;
@@ -46,26 +49,45 @@ public class LoginPresenterImpl implements LoginPresenter{
                     Future<String> future = executor.submit(loginCall);
                     String response = future.get();
 
-                    Log.e("log", response);
 
                     JSONObject responseJson = JsonUtil.parseJsonObject(response);
 
-                    try {
+                    if (!responseJson.has("error")){
 
-                        String token = responseJson.getString("access_token");
+                        String token = responseJson.getString("id");
 
                         sessionManager.createSession(username,password,token);
 
-                        mainView.onSuccessLogin();
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mainView.onSuccessLogin();
+                            }
+                        });
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        mainView.onErrorLogin(e.getMessage());
+                    } else {
+
+                        JSONObject error = responseJson.getJSONObject("error");
+                        final String errorMessage = error.getString("message");
+
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mainView.onErrorLogin(errorMessage);
+                            }
+                        });
+
                     }
 
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
-                    mainView.onErrorLogin(e.getMessage());
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mainView.onErrorLogin(e.getMessage());
+                        }
+                    });
+
                 }
 
             }

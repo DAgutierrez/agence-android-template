@@ -28,7 +28,7 @@ public class LoginCall implements Callable<String> {
     public String call() throws Exception {
 
         String params =
-                "username=" + URLEncoder.encode(username, "UTF-8") +
+                "email=" + URLEncoder.encode(username, "UTF-8") +
                 "&password=" + URLEncoder.encode(password, "UTF-8");
 
         RestRequest restRequest =  new RestRequest();

@@ -28,14 +28,13 @@ public class SessionManagerImpl implements SessionManager {
 
         this.context = context;
         this.pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        editor = pref.edit();
 
 
     }
 
     @Override
     public void createSession (String username, String password, String token) {
-
-        editor = pref.edit();
 
         editor.putBoolean(IS_LOGIN, true);
 
@@ -47,9 +46,9 @@ public class SessionManagerImpl implements SessionManager {
 
         editor.commit();
 
-        Boolean isLogin = pref.getBoolean(IS_LOGIN, false);
-
-        Log.e("log",isLogin.toString());
+//        Boolean isLogin = pref.getBoolean(IS_LOGIN, false);
+//
+//        Log.e("log",isLogin.toString());
 
     }
 

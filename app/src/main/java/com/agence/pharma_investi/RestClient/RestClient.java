@@ -84,7 +84,7 @@ public class RestClient implements Callable<String> {
                     responseError.append(inputLine);
                 }
 
-                return  "Error " + responseError.toString();
+                return responseError.toString();
             }
 
         } catch(Exception e) {

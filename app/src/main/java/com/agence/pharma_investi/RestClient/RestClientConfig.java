@@ -5,6 +5,6 @@ package com.agence.pharma_investi.RestClient;
  */
 public class RestClientConfig {
 
-    public static String SERVER_ADDRESS =  "http://192.168.1.129:3000";
+    public static String SERVER_ADDRESS =  "http://192.168.1.129:8088/api";
 
 }

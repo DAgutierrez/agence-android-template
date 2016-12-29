@@ -85,6 +85,7 @@ public class LoginFragment extends Fragment  implements  LoginView{
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
+
         txtTitle.setTypeface(ttfRobotoRegular);
         btnLogin.setTypeface(ttfRobotoRegular);
         inpUsername.setTypeface(ttfRobotoRegular);
@@ -126,9 +127,9 @@ public class LoginFragment extends Fragment  implements  LoginView{
     };
 
     @Override
-    public void onErrorLogin(String error) {
+    public void onErrorLogin(String errorMessage) {
 
-        toast = Toast.makeText(context, error , Toast.LENGTH_SHORT);
+        toast = Toast.makeText(context, errorMessage , Toast.LENGTH_SHORT);
         toast.show();
 
     }
