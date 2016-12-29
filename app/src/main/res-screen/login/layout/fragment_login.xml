@@ -5,7 +5,7 @@
     android:id="@+id/Layout">
 
 
-    <com.gutierrez.diego.android_template.elements.TextViewElement
+    <com.agence.pharma_investi.elements.TextViewElement
         android:id="@+id/txtLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
