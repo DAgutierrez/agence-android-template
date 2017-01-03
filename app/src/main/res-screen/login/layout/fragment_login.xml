@@ -1,53 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/Layout">
+    android:id="@+id/Layout"
+    android:weightSum="1">
 
 
-    <com.agence.pharma_investi.elements.TextViewElement
-        android:id="@+id/txtLogin"
+    <ImageView
+        android:layout_width="159dp"
+        android:layout_height="49dp"
+        app:srcCompat="@mipmap/logo_2"
+        android:id="@+id/logo2Img"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="end"/>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MotorApp"
-        android:textColor="@color/colorText"
-        android:textSize="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"/>
+        app:srcCompat="@mipmap/logo_1"
+        android:id="@+id/logo1Img"
+        android:adjustViewBounds="false"
+        android:layout_marginTop="35dp"
+        android:layout_weight="0.09"
+        android:layout_gravity="center"/>
 
-    <EditText
-        android:id="@+id/inpUsername"
-        android:inputType="textEmailAddress"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inpLayoutUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:textColor="@color/colorText"
-        android:textColorHint="@color/colorText"
+        android:theme="@style/TextLabel"
+      >
 
-        android:hint="Usuario"/>
+        <EditText
+            android:id="@+id/inpUsername"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText"
+            android:hint="Usuario"
+            />
 
-    <EditText
-        android:id="@+id/inpPassword"
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inpLayoutPassword"
         android:layout_width="match_parent"
-        android:inputType="textPassword"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorText"
-        android:textColorHint="@color/colorText"
-        android:textColorHighlight="@color/colorText"
-        android:textColorLink="@color/colorText"
-        android:shadowColor="@color/colorText"
-        android:hint="Password"/>
+        android:layout_marginTop="25dp"
+        android:theme="@style/TextLabel">
+
+        <EditText
+            android:id="@+id/inpPassword"
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText"
+            android:textColorHighlight="@color/colorText"
+            android:textColorLink="@color/colorText"
+            android:shadowColor="@color/colorText"
+            android:hint="Password"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
 
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:text="Ingresar"
         android:textSize="20dp"
-        android:background="@color/colorText"
-        android:textColor="@color/colorPrimary"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
         android:id="@+id/btnLogin" />
 
 </LinearLayout>

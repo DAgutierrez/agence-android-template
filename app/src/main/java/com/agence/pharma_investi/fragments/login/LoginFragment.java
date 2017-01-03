@@ -21,7 +21,11 @@ import android.widget.Toast;
 import com.agence.pharma_investi.R;
 import com.agence.pharma_investi.fragments.HomeFragment;
 import com.agence.pharma_investi.presenters.login.LoginPresenterImpl;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,7 +35,7 @@ import butterknife.ButterKnife;
 /**
  * Created by diego on 20-10-16.
  */
-public class LoginFragment extends Fragment  implements  LoginView{
+public class LoginFragment extends Fragment  implements  LoginView, Validator.ValidationListener {
 
     Context context;
     FragmentManager fm;
@@ -42,12 +46,14 @@ public class LoginFragment extends Fragment  implements  LoginView{
     Toast toast;
 
     LoginPresenterImpl presenter;
-
-    @BindView(R.id.txtLogin) TextView txtTitle;
+    Validator validator;
 
     @BindView(R.id.btnLogin) Button btnLogin;
 
+    @NotEmpty
     @BindView(R.id.inpUsername)  EditText inpUsername;
+
+    @NotEmpty
     @BindView(R.id.inpPassword)  EditText inpPassword;
 
     ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -59,6 +65,9 @@ public class LoginFragment extends Fragment  implements  LoginView{
 
         context = getActivity();
         fm = getActivity().getSupportFragmentManager();
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -85,8 +94,6 @@ public class LoginFragment extends Fragment  implements  LoginView{
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
-
-        txtTitle.setTypeface(ttfRobotoRegular);
         btnLogin.setTypeface(ttfRobotoRegular);
         inpUsername.setTypeface(ttfRobotoRegular);
         inpPassword.setTypeface(ttfRobotoRegular);
@@ -111,18 +118,7 @@ public class LoginFragment extends Fragment  implements  LoginView{
     private  View.OnClickListener loginAction =  new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
-            final String username =  inpUsername.getText().toString();
-            final String password = inpPassword.getText().toString();
-
-            Boolean theFormIsValid = theFormIsValid(username,password);
-
-            if (theFormIsValid) {
-
-                executor.submit(presenter.login(username,password));
-
-
-            }
+            validator.validate();
         }
     };
 
@@ -145,28 +141,28 @@ public class LoginFragment extends Fragment  implements  LoginView{
 
     }
 
-    private Boolean theFormIsValid(String username,String password) {
 
-        if (username.isEmpty() || password.isEmpty()) {
+    @Override
+    public void onValidationSucceeded() {
 
-            if (username.isEmpty())  inpUsername.getBackground().setColorFilter(getResources().getColor(R.color.colorRed), PorterDuff.Mode.SRC_ATOP);
-            if (password.isEmpty())  inpPassword.getBackground().setColorFilter(getResources().getColor(R.color.colorRed), PorterDuff.Mode.SRC_ATOP);
+        String username = inpUsername.getText().toString();
+        String password = inpPassword.getText().toString();
 
-            toast = Toast.makeText(context, "campo requerido" , Toast.LENGTH_SHORT);
-            toast.show();
-
-            return false;
-        } else {
-
-            return true;
-        }
-
-
-
+        executor.submit(presenter.login(username,password));
     }
 
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(context);
 
-
-
-
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }

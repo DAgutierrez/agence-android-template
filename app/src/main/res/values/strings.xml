@@ -4,8 +4,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
     <string name="title_activity_home">HomeActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -16,6 +14,29 @@
     <!-- My Strings -->
 
     <string name="required_field">Campo Requerido</string>
+
+
+
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="send">Entrar</string>
+    <string name="power">Cerrar</string>
+    <string name="action_menu_1">Cuadro de Procesos</string>
+    <string name="action_menu_2">Ingreso de Solicitud</string>
+    <string name="action_menu_3">Calendario Mantencion de Equipo</string>
+    <string name="action_menu_4">Disponibilidad de Recursos</string>
+    <string name="action_menu_5">Mantenedores</string>
+    <string name="action_menu_5_1">Importar Plan Anual de Mantención</string>
+    <string name="action_menu_5_2">Mantenedor Encuesta</string>
+    <string name="action_menu_5_3">Mantenedor de Equipos</string>
+    <string name="action_menu_5_4">Mantenedor de Clientes</string>
+    <string name="action_menu_5_5">Mantenedor de Documentos</string>
+    <string name="action_menu_6">Reportes</string>
+    <string name="action_menu_6_1">Encuesta</string>
+    <string name="action_menu_7">Usuarios</string>
+    <string name="action_menu_7_1">Registro de Usuarios</string>
+    <string name="action_menu_7_2">Listado de Usuarios</string>
+    <string name="action_settings">Salir</string>
 
 
 
